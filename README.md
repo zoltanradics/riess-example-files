@@ -1,0 +1,3 @@
+#### Explanation 
+
+The files of the attached project was a Shopify project where my client request was a web- application like user experience for one of their feature but they did not want to leave Shopify cloud infrastructure. (basically I had to stay within a shopify theme technically) So I decided to build the. desired features using liquid template engine + web components standards using the LitElement framework. Using this framework I was able to keep maintenance complexity down (we did not need CI/CD pipelines to build an entire SPA) but having a complex app like user experience which can scale like any other web application.
