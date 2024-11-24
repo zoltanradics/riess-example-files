@@ -1,0 +1,13 @@
+<script id="pods-product-data" type="application/json">
+  [
+    {% for product in section.settings["product-list-standard-pod"] %}
+      {%- render 'rd-pods-product-item-data', product: product %}
+    {% endfor %}
+    {% for product in section.settings["product-list-anymush-pod"] %}
+      {%- render 'rd-pods-product-item-data', product: product %}
+    {% endfor %}
+    {% for product in section.settings["product-list-care-product"] %}
+      {%- render 'rd-pods-product-item-data', product: product, last: forloop.last %}
+    {% endfor %}
+  ]
+</script>

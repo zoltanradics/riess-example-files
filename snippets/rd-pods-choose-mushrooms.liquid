@@ -1,0 +1,22 @@
+<div class="section__content">
+  <sh-tabber active-index="0">
+    <div class="tabs" slot="tabs">
+      <button class="tab" content="product-list-standard-pod">Standard Pod</button>
+      <button class="tab" content="product-list-anymush-pod">AnyMush Pod</button>
+    </div>
+    <div class="content" slot="content">
+      <div name="product-list-standard-pod">
+        <div class="desc">​​Cultivate a variety of mushrooms effortlessly at home with Shrooly's easy-to-use, ready to grow Pods.</div>
+        <div class="pods-product-items">
+          {% render 'rd-pods-product-list', type: 'product-list-standard-pod', enable_more_information: true, enable_metadata_on_tray: true %}
+        </div>
+      </div>
+      <div name="product-list-anymush-pod">
+        <div class="desc">Want to Grow Something Else? Grow a large mushroom variety with ease using our AnyMush™ Pod and the Shrooly app.</div>
+        <div class="pods-product-items">
+          {% render 'rd-pods-product-list', type: 'product-list-anymush-pod', enable_more_information: true, enable_metadata_on_tray: true %}
+        </div>
+      </div>
+    </div>
+  </sh-tabber>
+</div>

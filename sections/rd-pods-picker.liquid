@@ -1,0 +1,65 @@
+{{ 'rd-section-pods.css' | asset_url | stylesheet_tag }}
+
+{% render 'rd-pods-picker-product-list-json'  %}
+
+<script src="{{ 'rd-lib-virtual-cart.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'rd-section-pods-picker.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'rd-component-free-pod-counter.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-credit-displayment-block.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-credit-displayment.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-currency-displayment.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-alert.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-checkbox.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-tabber.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-virtual-cart.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-virtual-cart-line.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-virtual-cart-total-line.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-quantity-selector.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-button.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-button-icon.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-product-item.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-product-item-metadata.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-product-item-description.js' | asset_url }}" type="module"></script>
+
+<script>
+  window.podPickerBaseProductId = {{ section.settings['base-product'].variants[0].id }}
+  window.podPickerNumberOfFreePods = {{ section.settings['number-of-free-pods'] }}
+</script>
+
+<div class="pods">
+    <div class="pods__section pods__section--vertical">
+      {% render 'section-head', title: "Pick your Free Pod", desc: "You can also add extra Pods to your cart for just 19 EUR each." %}
+      {% render 'rd-pods-picker-product-list', type: 'product-list', enable_more_information: true, enable_metadata_on_tray: true %}
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "Pods Picker",
+  "settings": [
+    { 
+      "id": "base-product", 
+      "type": "product", 
+      "label": "The base product" 
+    },
+    {
+      "id": "pods",
+      "type": "product_list",
+      "label": "Pods",
+      "info": "List of pod products",
+    },
+    {
+      "id": "number-of-free-pods",
+      "type": "number",
+      "label": "Number of free pods",
+      "info": "Number of free pods can be claimed per purchsed base product"
+    },
+  ],
+  "presets": [
+    {
+      "name": "Pods Picker",
+      "category": "pods"
+    }
+  ]
+}
+{% endschema %}

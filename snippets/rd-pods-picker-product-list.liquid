@@ -1,0 +1,11 @@
+<div class="section__content">
+  <div class="free-pod-counter">
+    <sh-free-pod-counter id="free-pods-counter" number-of-total-selected-pods="0" number-of-free-pods="{{ section.settings['number-of-free-pods'] }}" label="Free pod selected"></sh-free-pod-counter>
+  </div>
+  <div class="pods-product-items">
+    {% render 'rd-pods-product-list', type: 'pods', enable_more_information: true, enable_metadata_on_tray: true %}
+  </div>
+  <div class="checkoutübutton">
+    <sh-button id="pods-picker-checkout-button" label="Go to checkout"></sh-button>
+  </div>
+</div>

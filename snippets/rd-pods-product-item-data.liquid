@@ -1,0 +1,22 @@
+{
+  "id": "{{ product.variants[0].id }}",
+  "title": "{{ product.title }}",
+  "subtitle": "{{ product.metafields.custom.subtitle }}",
+  "description": "{{ product.description| strip_newlines | strip_html  }}",
+  "quantity": "{{ product.quantity }}",
+  "price": "{{ product.price }}",
+  "tags": "{%for tag in product.tags %}{{ tag }}{% if forloop.last != true %},{% endif %}{% endfor %}",
+  "credit": "{{ product.metafields.custom.credit }}",
+  "imageSrc": "{{product.featured_image | image_url}}",
+  "bigImageSrc": "{{ product.images[1] | image_url }}",
+  "category": "{{ product.metafields.custom.category }}",
+  "growingTemperature": "{{ product.metafields.custom.growing_temperature }}",
+  "cultivationTime": "{{ product.metafields.custom.cultivation_time }}",
+  "shelfLife": "{{ product.metafields.custom.shelf_life }}",
+  "recommendedForFirstGrow": "{{ product.metafields.custom.recommended_for_first_grow }}",
+  "harvestation": "{{ product.metafields.custom.harvestation }}",
+  "servingYield": "{{ product.metafields.custom.serving_yield }}",
+  "enableMetadata": "null",
+  "enableDescription": "null",
+  "enableMoreInformation": "null"
+}{% if last != true %},{% endif %}

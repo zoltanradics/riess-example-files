@@ -1,0 +1,94 @@
+{{ 'rd-section-pods.css' | asset_url | stylesheet_tag }}
+
+{% render 'rd-pods-product-data'  %}
+
+{% comment %} Load JS files {% endcomment %}
+<script src="{{ 'rd-lib-virtual-cart.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'rd-section-pods.js' | asset_url }}" defer="defer"></script>
+
+{% comment %} Load custom-ement web components {% endcomment %}
+<script src="{{ 'rd-component-credit-displayment.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-currency-displayment.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-credit-displayment.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-alert.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-tabber.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-virtual-cart.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-virtual-cart-line.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-virtual-cart-total-line.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-quantity-selector.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-button.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-button-icon.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-product-item.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-product-item-metadata.js' | asset_url }}" type="module"></script>
+<script src="{{ 'rd-component-product-item-description.js' | asset_url }}" type="module"></script>
+
+{%- assign standard_pod_credit = customer.metafields.custom.rivo.points_balance | default: 0 -%}
+{%- assign any_mush_pod_credit = customer.metafields.appstle_loyalty.customer_loyalty.availablePoints | default: 0 -%}
+
+<script>
+  // This is a temporary solution until we figure out to get usermeta differently
+  window.rivoData = {{ customer.metafields.custom | json }}
+  window.appstleData = {{ customer.metafields.appstle_loyalty | json }}
+</script>
+
+<div class="page">
+
+    <div class="pods__section">
+    {% if customer %}
+      {% render 'section-head', title: "Available Credits", desc:"You can see the amount of your available Pod Credits." %}
+      {% render 'rd-pods-availabilities', standardPodCredit: standard_pod_credit, anyMushPodCredit: any_mush_pod_credit %}
+    {% else %}
+      {% render 'section-head', title: "Log in to Your Account" %}
+      {% render 'rd-pods-not-logged-in' %}
+    {% endif %}
+    </div>
+
+    <div class="pods__section">
+      {% render 'section-head', title: "Choose Mushrooms", desc: "Choose the types of mushrooms you would like to claim. ​​Cultivate a variety of mushrooms effortlessly at home with Shrooly's easy-to-use, ready to grow Pods." %}
+      {% render 'rd-pods-choose-mushrooms' %}
+    </div>
+
+    <div class="pods__section">
+      {% render 'section-head', title: "Order Summary", desc: "Find the summary of your order below. Please note that you will need to select the amount of credits you want to redeem at the next step of checkout. By default, the full price will be displayed." %}
+      {% render 'rd-pods-order-summary', cart: cart, shippingFee: section.settings['shipping-fee'] %}
+    </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Pods",
+  "settings": [
+    {
+      "id": "product-list-standard-pod",
+      "type": "product_list",
+      "label": "Product list (Standard pods)",
+      "info": "List of standard pod products",
+    },
+    {
+      "id": "product-list-anymush-pod",
+      "type": "product_list",
+      "label": "Product list (AnyMush pods)",
+      "info": "List of AnyMush pod products"
+    },
+    {
+      "id": "product-list-care-product",
+      "type": "product_list",
+      "label": "Care for your Shrooly",
+      "info": "List of care products"
+    },
+    {
+      "id": "shipping-fee",
+      "type": "number",
+      "label": "Device Shipping Fee",
+      "info": "Price of shipping"
+    },
+  ],
+  "presets": [
+    {
+      "name": "Pods",
+      "category": "pods"
+    }
+  ]
+}
+{% endschema %}

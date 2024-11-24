@@ -1,0 +1,65 @@
+{% if section.settings[type] == empty %}
+  <sh-alert icon="🤔" label="Something is missing here." />
+{% else %}
+  {% for product in section.settings[type] %}
+    <sh-product-item
+      class="pods-product-item" 
+      id="{{ product.variants[0].id }}"
+      title="{{ product.title }}"
+      description="{{ product.description | strip_html }}"
+      price="{{ product.price | divided_by: 100 }}"
+      tags="{%for tag in product.tags %}{{ tag }}{% if forloop.last != true %},{% endif %}{% endfor %}"
+
+      {% if product.metafields.custom.serving_yield %}
+      serving_yield="{{ product.metafields.custom.serving_yield }}"
+      {% endif %}
+
+      {% if product.metafields.custom.subtitle %}
+      subtitle="{{ product.metafields.custom.subtitle }}"
+      {% endif %}
+
+      {% if product.metafields.custom.credit %}
+      credit="{{ product.metafields.custom.credit }}"
+      {% endif %}
+
+      {% if product.featured_image %}
+      image_src="{{ product.featured_image | image_url }}" 
+      {% endif %}
+      
+      {% if product.metafields.custom.recommended_for_first_grow == true %}
+      recommended_for_first_grow="{{ product.metafields.custom.recommended_for_first_grow }}"
+      {% endif %}
+
+      {% if product.metafields.custom.category == true %}
+      category="{{ product.metafields.custom.category }}"
+      {% endif %}
+
+      {% if product.metafields.custom.growing_temperature == true %}
+      growing_temperature="{{ product.metafields.custom.growing_temperature }}"
+      {% endif %}
+
+      {% if product.metafields.custom.cultivation_time == true %}
+      cultivation_time="{{ product.metafields.custom.cultivation_time }}"
+      {% endif %}
+
+      {% if product.metafields.custom.shelf_life == true %}
+      shelf_life="{{ product.metafields.custom.shelf_life }}"
+      {% endif %}
+
+      {% if product.metafields.custom.recommended_for_first_grow == true %}
+      recommended_for_first_grow="{{ product.metafields.custom.recommended_for_first_grow }}"
+      {% endif %}
+
+      {% if enable_more_information == true %}
+      enable_more_information="true"
+      {% endif %}
+
+      {% if enable_metadata_on_tray == true %}
+      enable_metadata_on_tray="true"
+      {% endif %}
+
+      enable_padding="true"
+      enable_quantity_selector="true"
+    ></sh-product-item>
+  {% endfor %}
+{% endif %}
